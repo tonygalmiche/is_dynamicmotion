@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_etiquette_colis">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="o">
+                    <t>
+                        <div class="page">
+                            <div class="row">
+                                <div class="col-1"/>
+                                <div class="col-6">
+                                    <span><strong>Expéditeur / Ship FROM :</strong></span>
+                                    <div style="height:7mm"/>
+                                    <div 
+                                        t-field="o.picking_type_id.warehouse_id.partner_id"
+                                        t-options='{"widget": "contact", "fields": ["address", "name", "phone", "email"], "no_marker": True, "phone_icons": True}'
+                                    />
+                                    <!-- <div 
+                                        t-field="res_company.partner_id"
+                                        t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'
+                                    /> -->
+                                </div>
+                                <div class="col-5">
+                                    <span><strong>Destinataire / Ship TO : </strong></span>
+                                    <div style="height:7mm"/>
+                                    <div 
+                                        t-field="o.partner_id"
+                                        t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <record id="action_report_etiquette_colis" model="ir.actions.report">
+            <field name="name">Etiquette du colis</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">is_dynamicmotion.report_etiquette_colis</field>
+            <field name="report_file">is_dynamicmotion.report_etiquette_colis</field>
+            <field name="print_report_name">'Etiquette du colis - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="stock.model_stock_picking"/>
+            <field name="binding_type">report</field>
+        </record>
+
+
+
+    </data>
+</odoo>
