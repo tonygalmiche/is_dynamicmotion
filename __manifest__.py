@@ -12,9 +12,11 @@ InfoSaône - Module Odoo 16 pour Dynamic Motion
     'website'    : 'http://www.infosaone.com',
     'depends'    : [
         'base',
-        "stock",
+        'stock',
+        'sale_management',
     ],
     'data' : [
+        "views/stock_picking_view.xml",
         "report/report_deliveryslip.xml",
         "report/report_etiquette_colis.xml",
     ],
