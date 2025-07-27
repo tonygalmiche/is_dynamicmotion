@@ -16,7 +16,9 @@ InfoSaône - Module Odoo 16 pour Dynamic Motion
         'sale_management',
     ],
     'data' : [
+        "views/sale_order_view.xml",
         "views/stock_picking_view.xml",
+        "views/mrp_view.xml",
         "report/report_deliveryslip.xml",
         "report/report_etiquette_colis.xml",
     ],

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- sale.order -->
+        <record id="is_view_order_form" model="ir.ui.view">
+            <field name="name">is_view_order_form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="payment_term_id"  position="after">
+                    <field name="is_description"/>
+                    <field name="is_avancement"/>
+                </field>
+            </field>
+        </record>
+        <record id="is_view_order_tree" model="ir.ui.view">
+            <field name="name">is_view_order_tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <field name="date_order"  position="after">
+                    <field name="is_description" optional="show"/>
+                    <field name="is_avancement" widget="progressbar" optional="show"/>
+                </field>
+            </field>
+        </record>
+        <record id="is_view_sales_order_filter" model="ir.ui.view">
+            <field name="name">is_view_sales_order_filter</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <field name="partner_id"  position="after">
+                    <field name="is_avancement"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

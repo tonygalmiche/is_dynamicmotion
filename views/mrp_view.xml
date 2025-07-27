@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- mrp.production -->
+        <record id="is_mrp_production_form_view" model="ir.ui.view">
+            <field name="name">is_mrp_production_form_view</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <field name="date_deadline" position="replace"/>
+                <field name="origin"        position="replace"/>
+               <field name="components_availability_state"  position="before">
+                    <field name="is_date_planifiee"/>
+                    <field name="is_duree" widget="float_time"/>
+                    <field name="date_deadline"/>
+                    <field name="is_date_livraison"/>
+                </field>
+                <xpath expr="//page[@name='components']/field/tree/field[@name='manual_consumption']" position="after">
+                    <field 
+                        name="is_manquant" optional="show"
+                        decoration-warning="is_manquant &lt; 0"
+                    />
+                </xpath>
+               <field name="user_id"  position="before">
+                    <field name="origin"/>
+                    <field name="is_sale_id"/>
+                </field>
+            </field>
+        </record>
+        <record id="is_mrp_production_tree_view" model="ir.ui.view">
+            <field name="name">is_mrp_production_tree_view</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_tree_view"/>
+            <field name="arch" type="xml">               
+               <field name="date_planned_start"  position="after">
+                    <field name="is_date_planifiee" optional="show"/>
+                    <field name="is_duree" widget="float_time" optional="show"/>
+                </field>
+               <field name="date_deadline"  position="after">
+                    <field name="is_date_livraison" optional="show"/>
+                </field>
+               <field name="origin"  position="after">
+                    <field name="is_sale_id" widget="many2one_clickable" optional="show"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record id="is_view_production_calendar" model="ir.ui.view">
+            <field name="name">is_view_production_calendar</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.view_production_calendar"/>
+            <field name="arch" type="xml">
+                <xpath expr="//calendar" position="attributes">
+                    <attribute name="date_start">is_date_planifiee</attribute>
+                    <attribute name="date_stop"/>
+                    <attribute name="date_delay">is_duree</attribute>
+                    <attribute name="color">user_id</attribute>
+                </xpath>
+               
+
+               <field name="product_qty"  position="after">
+                    <field name="is_date_livraison"/>
+                    <field name="is_sale_id"/>
+                </field>
+
+
+            </field>
+        </record>
+
+
+<!-- 
+        <record id="view_production_calendar" model="ir.ui.view">
+            <field name="name">mrp.production.calendar</field>
+            <field name="model">mrp.production</field>
+            <field eval="2" name="priority"/>
+            <field name="arch" type="xml">
+                <calendar date_start="date_planned_start" date_stop="date_planned_finished"
+                          string="Manufacturing Orders" event_limit="5" quick_add="False">
+                    <field name="user_id" avatar_field="avatar_128"/>
+                    <field name="product_id"/>
+                    <field name="product_qty"/>
+                </calendar>
+            </field>
+        </record>
+ -->
+
+
+        <record id="is_view_mrp_production_filter" model="ir.ui.view">
+            <field name="name">is_view_mrp_production_filter</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.view_mrp_production_filter"/>
+            <field name="arch" type="xml">               
+               <field name="product_variant_attributes"  position="before">
+                    <field name="is_sale_id"/>
+                    <field name="user_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
