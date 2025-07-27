@@ -6,7 +6,7 @@ import re
 class mrp_production(models.Model):
     _inherit = "mrp.production"
 
-    date_deadline     = fields.Datetime(readonly=False) # Rendre le champ existant modifiable
+    date_deadline     = fields.Datetime(string="Date limite", readonly=False) # Rendre le champ existant modifiable
     origin            = fields.Char(tracking=True)      # Ajout de la tracabilité
     is_sale_id        = fields.Many2one('sale.order', string="Commande", compute='_compute_is_sale_id', store=True, readonly=True)
 
